@@ -21,11 +21,11 @@
 <h1 class="display-3 text-center">JVM monitoring container App</h1>
 <div class="container">
   <div class="row justify-content-center mt-5 mb-2">
-    <h2>CPU Usage</h2>
+    <h2>CPU Usage {{cpu}}</h2>
 
   </div>
   <div class="progress">
-    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: {{cpu}}%"></div>
   </div>
 
   <div class="row justify-content-center mt-2">
@@ -40,7 +40,7 @@
 
   </div>
   <div class="progress">
-    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: {{memory}}%"></div>
   </div>
 
   <div class="row justify-content-center mt-2">
@@ -49,6 +49,12 @@
     </p>
 
   </div>
+  <hr class="hr-dark">
+  <div class="row justify-content-center mt-5 mb-2">
+    <h2>Number of system processors</h2>
+
+  </div>
+  <h1 class="text-center"><span class="badge badge-secondary">{{processors}}</span></h1>
 
 </div>
 

@@ -1,8 +1,15 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Directive, Injectable, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import {interval} from 'rxjs/internal/observable/interval';
+
+
+interface Response {
+  CpuUsage: string;
+  MemoryUsage: string;
+  Processors: string;
+}
 
 // @ts-ignore
 @Component({
@@ -10,39 +17,42 @@ import {interval} from 'rxjs/internal/observable/interval';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
-@Injectable()
 export class AppComponent implements OnInit{
-  constructor(private http: HttpClient) { }
-  console:Object;
+  constructor(private http: HttpClient) {}
+
+
+
+  cpu = '';
+  memory = '';
+  processors = '';
   title = 'JavaApiFrontEnd';
   configUrl = 'https://heroku-java-api.herokuapp.com/';
-  ngOnInit(): void {
-   // this.getConfig().subscribe(data => {
-   //   console.log(data);
-   // });
 
+
+
+
+  ngOnInit() {
     interval(3000).subscribe(() => {
-      this.getConfig().subscribe(data =>{
+      this.getConfig().subscribe(data => {
         console.log(data);
-        this.console =  data;
+
+        this.cpu =  data.CpuUsage;
+        this.memory = data.MemoryUsage;
+        this.processors = data.Processors;
       });
     });
   }
-
 
   // tslint:disable-next-line:typedef
   getConfig() {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Access-Control-Allow-Origin': '/'
       })
     };
-    const value = this.http.get(this.configUrl, options);
-
-    return value;
+    return this.http.get<Response>(this.configUrl, options);
   }
 
 
