@@ -25,7 +25,7 @@ export class AppComponent implements OnInit{
     interval(3000).subscribe(() => {
       this.getConfig().subscribe(data =>{
         console.log(data);
-        this.console =  data.UsedHeapMemory;
+        this.console =  data;
       });
     });
   }
