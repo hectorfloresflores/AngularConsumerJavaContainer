@@ -32,7 +32,7 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit() {
-    interval(3000).subscribe(() => {
+    interval(1000).subscribe(() => {
       this.getConfig().subscribe(data => {
         console.log(data);
 
